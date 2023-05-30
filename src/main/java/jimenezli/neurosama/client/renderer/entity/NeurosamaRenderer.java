@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class NeurosamaRenderer extends BipedRenderer<NeurosamaEntity, NeurosamaModel<NeurosamaEntity>> {
     private static final ResourceLocation NEUROSAMA = new ResourceLocation(NeurosamaMod.ID, "textures/entity/neurosama.png");
+    private static final ResourceLocation NEUROSAMA_BOCCHI = new ResourceLocation(NeurosamaMod.ID, "textures/entity/neurosama_bocchi.png");
+
     public NeurosamaRenderer(EntityRendererManager p_i46102_1_) {
         super(p_i46102_1_, new NeurosamaModel<>(0.0F), 0.5F);
         this.addLayer(new BipedArmorLayer<>(this, new NeurosamaModel<>(0.5F), new NeurosamaModel<>(1.0F)));
@@ -23,6 +25,9 @@ public class NeurosamaRenderer extends BipedRenderer<NeurosamaEntity, NeurosamaM
 
     @Override
     public ResourceLocation getTextureLocation(NeurosamaEntity neurosama) {
+        if (neurosama.hasCustomName() && "Bocchi".equals(neurosama.getName().getContents())) {
+            return NEUROSAMA_BOCCHI;
+        }
         return NEUROSAMA;
     }
 }
