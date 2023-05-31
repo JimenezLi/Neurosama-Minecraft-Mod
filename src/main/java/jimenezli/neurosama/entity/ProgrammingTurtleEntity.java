@@ -21,9 +21,9 @@ public class ProgrammingTurtleEntity extends TurtleEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, DrawingFoxEntity.class));
     }
 
-//    public boolean isFood(ItemStack itemStack) {
-//        return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.ITEM_HEART;
-//    }
+    public boolean isFood(ItemStack itemStack) {
+        return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.HEART.get();
+    }
 
     public boolean canMate(AnimalEntity animal) {
         if (animal.getClass() != DrawingFoxEntity.class) {

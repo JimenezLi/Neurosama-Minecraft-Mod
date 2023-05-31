@@ -1,5 +1,7 @@
 {
   "entity.neurosama.neurosama": "Neurosama",
+  "entity.neurosama.programmingturtle": "Programming Turtle",
+  "entity.neurosama.drawingfox": "Drawing Fox",
 
   "item.neurosama.heart": "Heart",
   "item.neurosama.ironmilk": "Iron Milk"

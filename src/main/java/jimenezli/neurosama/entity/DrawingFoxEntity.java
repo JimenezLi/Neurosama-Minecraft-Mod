@@ -1,6 +1,5 @@
 package jimenezli.neurosama.entity;
 
-import jimenezli.neurosama.handler.EntityHandler;
 import jimenezli.neurosama.handler.ItemHandler;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -21,9 +20,9 @@ public class DrawingFoxEntity extends FoxEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, ProgrammingTurtleEntity.class));
     }
 
-//    public boolean isFood(ItemStack itemStack) {
-//        return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.ITEM_HEART;
-//    }
+    public boolean isFood(ItemStack itemStack) {
+        return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.HEART.get();
+    }
 
     public boolean canMate(AnimalEntity animal) {
         if (animal.getClass() != ProgrammingTurtleEntity.class) {
