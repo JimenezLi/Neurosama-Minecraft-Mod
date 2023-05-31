@@ -20,6 +20,20 @@ public class DrawingFoxEntity extends FoxEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, ProgrammingTurtleEntity.class));
     }
 
+    /**
+     * Anny won't drop any experience in case someone kills her on purpose.
+     */
+    protected boolean shouldDropExperience() {
+        return false;
+    }
+
+    /**
+     * Anny won't drop any loot in case someone kills her on purpose.
+     */
+    protected boolean shouldDropLoot() {
+        return false;
+    }
+
     public boolean isFood(ItemStack itemStack) {
         return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.HEART.get();
     }

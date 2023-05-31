@@ -8,11 +8,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
-import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.PathType;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -21,6 +23,8 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 
 public class NeurosamaEntity extends AnimalEntity {
+    private int heartTime = this.random.nextInt(6000) + 6000;
+
     public NeurosamaEntity(EntityType<? extends AnimalEntity> p_i48581_1_, World p_i48581_2_) {
         super(p_i48581_1_, p_i48581_2_);
     }
@@ -39,6 +43,43 @@ public class NeurosamaEntity extends AnimalEntity {
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
 
+    /**
+     * Neurosama produces heart like chicken produces egg.
+     */
+    public void aiStep() {
+        super.aiStep();
+
+        if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.heartTime <= 0) {
+            this.spawnAtLocation(ItemHandler.HEART.get());
+            this.heartTime = this.random.nextInt(6000) + 6000;
+        }
+    }
+
+    public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
+        super.readAdditionalSaveData(p_70037_1_);
+        if (p_70037_1_.contains("HeartProductionTime")) {
+            this.heartTime = p_70037_1_.getInt("HeartProductionTime");
+        }
+    }
+
+    public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
+        super.addAdditionalSaveData(p_213281_1_);
+        p_213281_1_.putInt("HeartProductionTime", this.heartTime);
+    }
+
+    /**
+     * Neurosama won't drop any experience in case someone kills her on purpose.
+     */
+    protected boolean shouldDropExperience() {
+        return false;
+    }
+
+    /**
+     * Neurosama won't drop any loot in case someone kills her on purpose.
+     */
+    protected boolean shouldDropLoot() {
+        return false;
+    }
     public boolean isFood(ItemStack itemStack) {
         return itemStack.getItem() == ItemHandler.IRONMILK.get();
     }

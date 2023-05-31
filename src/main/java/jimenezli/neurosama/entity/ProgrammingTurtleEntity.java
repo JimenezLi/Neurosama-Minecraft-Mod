@@ -21,6 +21,20 @@ public class ProgrammingTurtleEntity extends TurtleEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, DrawingFoxEntity.class));
     }
 
+    /**
+     * Vedal won't drop any experience in case someone kills him on purpose.
+     */
+    protected boolean shouldDropExperience() {
+        return false;
+    }
+
+    /**
+     * Vedal won't drop any loot in case someone kills him on purpose.
+     */
+    protected boolean shouldDropLoot() {
+        return false;
+    }
+
     public boolean isFood(ItemStack itemStack) {
         return super.isFood(itemStack) || itemStack.getItem() == ItemHandler.HEART.get();
     }
