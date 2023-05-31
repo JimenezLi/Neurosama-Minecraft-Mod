@@ -1,7 +1,9 @@
 package jimenezli.neurosama.handler;
 
 import jimenezli.neurosama.NeurosamaMod;
+import jimenezli.neurosama.client.renderer.entity.DrawingFoxRenderer;
 import jimenezli.neurosama.client.renderer.entity.NeurosamaRenderer;
+import jimenezli.neurosama.client.renderer.entity.ProgrammingTurtleRenderer;
 import jimenezli.neurosama.entity.DrawingFoxEntity;
 import jimenezli.neurosama.entity.NeurosamaEntity;
 import jimenezli.neurosama.entity.ProgrammingTurtleEntity;
@@ -64,7 +66,7 @@ public class EntityHandler {
     @OnlyIn(Dist.CLIENT)
     public static void registerEntityRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(neurosama, NeurosamaRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(programmingTurtle, TurtleRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(drawingFox, FoxRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(programmingTurtle, ProgrammingTurtleRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(drawingFox, DrawingFoxRenderer::new);
     }
 }
