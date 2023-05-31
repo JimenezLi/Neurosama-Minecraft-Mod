@@ -2,9 +2,13 @@ package jimenezli.neurosama.handler;
 
 import jimenezli.neurosama.NeurosamaMod;
 import jimenezli.neurosama.client.renderer.entity.NeurosamaRenderer;
+import jimenezli.neurosama.entity.DrawingFoxEntity;
 import jimenezli.neurosama.entity.NeurosamaEntity;
+import jimenezli.neurosama.entity.ProgrammingTurtleEntity;
 import jimenezli.neurosama.util.EntityNames;
+import net.minecraft.client.renderer.entity.FoxRenderer;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
+import net.minecraft.client.renderer.entity.TurtleRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -24,6 +28,8 @@ import java.util.List;
 public class EntityHandler {
     private static final List<EntityType<?>> ALL = new ArrayList<>();
     public static final EntityType<NeurosamaEntity> neurosama = build(EntityNames.NEUROSAMA, makeCastedBuilder(NeurosamaEntity.class, NeurosamaEntity::new, EntityClassification.CREATURE));
+    public static final EntityType<ProgrammingTurtleEntity> programmingTurtle = build(EntityNames.PROGRAMMING_TURTLE, makeCastedBuilder(ProgrammingTurtleEntity.class, ProgrammingTurtleEntity::new, EntityClassification.CREATURE));
+    public static final EntityType<DrawingFoxEntity> drawingFox = build(EntityNames.DRAWING_FOX, makeCastedBuilder(DrawingFoxEntity.class, DrawingFoxEntity::new, EntityClassification.CREATURE));
 
     @SuppressWarnings("unchecked")
     private static <E extends Entity> EntityType<E> build(ResourceLocation id, EntityType.Builder<E> builder) {
@@ -51,10 +57,14 @@ public class EntityHandler {
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(neurosama, NeurosamaEntity.createMobAttributes().build());
+        event.put(programmingTurtle, ProgrammingTurtleEntity.createMobAttributes().build());
+        event.put(drawingFox, DrawingFoxEntity.createMobAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)
     public static void registerEntityRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(neurosama, NeurosamaRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(programmingTurtle, TurtleRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(drawingFox, FoxRenderer::new);
     }
 }

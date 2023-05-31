@@ -3,9 +3,11 @@ package jimenezli.neurosama.handler;
 import jimenezli.neurosama.NeurosamaMod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.system.CallbackI;
 
 public class ItemHandler {
     public static ItemGroup creativeTab = ItemGroup.TAB_MISC;
@@ -17,4 +19,7 @@ public class ItemHandler {
 
     public static final RegistryObject<Item> heart = ITEMS.register("heart", () -> new Item(defaultBuilder()));
     public static final RegistryObject<Item> ironmilk = ITEMS.register("ironmilk", () -> new Item(defaultBuilder()));
+
+//    public static final Item ITEM_HEART = heart.get();
+//    public static final Item ITEM_IRONMILK = ironmilk.get();
 }

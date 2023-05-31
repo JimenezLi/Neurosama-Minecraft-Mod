@@ -11,4 +11,6 @@ public class EntityNames {
     }
 
     public static final ResourceLocation NEUROSAMA = prefix("neurosama");
+    public static final ResourceLocation PROGRAMMING_TURTLE = prefix("programmingturtle");
+    public static final ResourceLocation DRAWING_FOX = prefix("drawingfox");
 }
