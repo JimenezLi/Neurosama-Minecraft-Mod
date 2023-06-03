@@ -1,9 +1,12 @@
 package jimenezli.neurosama.entity;
 
+import jimenezli.neurosama.entity.ai.goal.FamilyHurtByTargetGoal;
+import jimenezli.neurosama.entity.ai.goal.NeurosamaFamilyHurtByTargetGoal;
 import jimenezli.neurosama.handler.ItemHandler;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +21,8 @@ public class DrawingFoxEntity extends FoxEntity {
     public void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, ProgrammingTurtleEntity.class));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
+        this.targetSelector.addGoal(1, new NeurosamaFamilyHurtByTargetGoal(this));
     }
 
     /**

@@ -8,9 +8,6 @@ import jimenezli.neurosama.entity.DrawingFoxEntity;
 import jimenezli.neurosama.entity.NeurosamaEntity;
 import jimenezli.neurosama.entity.ProgrammingTurtleEntity;
 import jimenezli.neurosama.util.EntityNames;
-import net.minecraft.client.renderer.entity.FoxRenderer;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.entity.TurtleRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -58,9 +55,9 @@ public class EntityHandler {
 
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(neurosama, NeurosamaEntity.createMobAttributes().build());
-        event.put(programmingTurtle, ProgrammingTurtleEntity.createMobAttributes().build());
-        event.put(drawingFox, DrawingFoxEntity.createMobAttributes().build());
+        event.put(neurosama, NeurosamaEntity.createAttributes().build());
+        event.put(programmingTurtle, ProgrammingTurtleEntity.createAttributes().build());
+        event.put(drawingFox, DrawingFoxEntity.createAttributes().build());
     }
 
     @OnlyIn(Dist.CLIENT)

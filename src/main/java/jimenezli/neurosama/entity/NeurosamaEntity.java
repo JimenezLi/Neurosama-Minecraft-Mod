@@ -1,20 +1,23 @@
 package jimenezli.neurosama.entity;
 
+import jimenezli.neurosama.entity.ai.goal.FamilyHurtByTargetGoal;
+import jimenezli.neurosama.entity.ai.goal.NeurosamaFamilyHurtByTargetGoal;
 import jimenezli.neurosama.handler.EntityHandler;
 import jimenezli.neurosama.handler.ItemHandler;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.PathType;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -35,12 +38,19 @@ public class NeurosamaEntity extends AnimalEntity {
      */
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new MoveToLavaGoal(this, 1.5D));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
         this.goalSelector.addGoal(7, new RandomWalkingGoal(this, 1.0D, 60));
         this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(8, new LookAtGoal(this, TurtleEntity.class, 8.0F));
         this.goalSelector.addGoal(8, new LookAtGoal(this, FoxEntity.class, 8.0F));
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.targetSelector.addGoal(1, new NeurosamaFamilyHurtByTargetGoal(this));
+    }
+
+    public static AttributeModifierMap.MutableAttribute createAttributes() {
+        return MobEntity.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 
     /**
@@ -80,6 +90,7 @@ public class NeurosamaEntity extends AnimalEntity {
     protected boolean shouldDropLoot() {
         return false;
     }
+
     public boolean isFood(ItemStack itemStack) {
         return itemStack.getItem() == ItemHandler.IRONMILK.get();
     }

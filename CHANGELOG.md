@@ -1,3 +1,7 @@
+## 0.0.2-Alpha
+### Features
+- Add Neurosama family attack: if you attack any family member of Neurosama, you will be attacked by all family members.
+
 ## 0.0.1-Alpha
 ### Features
 - Add 3 entities: Neurosama, Programming Turtle, and Drawing Fox.
